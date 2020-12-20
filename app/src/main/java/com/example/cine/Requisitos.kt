@@ -13,3 +13,17 @@ package com.example.cine
 //si es mayor de 16 años se debe mostrar solo peliculas sony
 
 //si es menor de 16 años se debe mostrar peliculas de disney
+
+/*Requisitos 2.0:
+
+    Home seleccion de Cine. Lista (Imagen, nombre y direccion)
+    guardar info de cine para la lista de peliculas
+
+    nueva pantalla con filtro de edad, seleccion cantidad de personas
+
+    Nueva pantalla con lista de peliculas (imagen, nombre, año, 3D, precio, categoria)
+
+
+
+
+ */

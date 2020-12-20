@@ -10,15 +10,13 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.clase7.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class CineActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener,
+public class CineActivity extends BaseActivity implements AdapterView.OnItemSelectedListener,
         View.OnClickListener {
 
     TextView auxiliar;
@@ -33,7 +31,6 @@ public class CineActivity extends AppCompatActivity implements AdapterView.OnIte
     ArrayAdapter<String> adapterPeliculas;
     int cntSeleccionada = 0;
     double valorPelicula = 0;
-
 
 
     @Override
@@ -65,8 +62,6 @@ public class CineActivity extends AppCompatActivity implements AdapterView.OnIte
         cntPersonas.setOnItemSelectedListener(this);
         spinnerPeliculas.setOnItemSelectedListener(this);
         btnComprar.setOnClickListener(this);
-
-        //NUEVO CAMBIO
 
 
     }
@@ -114,8 +109,8 @@ public class CineActivity extends AppCompatActivity implements AdapterView.OnIte
                 } else {
                     cargarLista("Disney");
                 }
-            }else{
-                Toast.makeText(this, "No se ingreso edad", Toast.LENGTH_SHORT).show();
+            } else {
+                toast(Constants.AGE_MESSAGE);
             }
         }
     }
@@ -125,7 +120,7 @@ public class CineActivity extends AppCompatActivity implements AdapterView.OnIte
         double totalFinal;
         if (cntSeleccionada == 5) {
             totalFinal = (cntSeleccionada * valorPelicula * 0.8);
-        }else {
+        } else {
             totalFinal = (cntSeleccionada * valorPelicula);
         }
         textTotal.setText(String.valueOf(totalFinal));
@@ -144,13 +139,11 @@ public class CineActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         //Cargo lista con titulos solo del proveedor correspondiente
-        for (int i = 0; i < listaPeliculas.size(); i++) {
-
-            if (listaPeliculas.get(i).getProveedor().getNombre().equals(proveedor)) {
-
+        for (Pelicula pelicula : listaPeliculas) {
+            if (pelicula.getProveedor().getNombre().equals(proveedor)) {
                 //COPIAR ELEMENTOS DE UN ARRAYLIST A OTRO
-                listaPelFiltradas.add(listaPeliculas.get(i));
-                titulosPeliculas.add(listaPeliculas.get(i).getTitulo() + " (3D: " + listaPeliculas.get(i).getTresD() + " ) [ " + listaPeliculas.get(i).getProveedor().getNombre() + " ] - $" + listaPeliculas.get(i).getValor());
+                listaPelFiltradas.add(pelicula);
+                titulosPeliculas.add(pelicula.getTitulo() + " (3D: " + pelicula.getTresD() + " ) [ " + pelicula.getProveedor().getNombre() + " ] - $" + pelicula.getValor());
 
             }
         }
