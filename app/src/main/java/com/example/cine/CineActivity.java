@@ -66,6 +66,9 @@ public class CineActivity extends AppCompatActivity implements AdapterView.OnIte
         spinnerPeliculas.setOnItemSelectedListener(this);
         btnComprar.setOnClickListener(this);
 
+        //NUEVO CAMBIO
+
+
     }
 
 
