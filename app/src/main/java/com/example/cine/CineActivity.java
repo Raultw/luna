@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.clase7.R;
 
@@ -29,6 +28,7 @@ public class CineActivity extends BaseActivity implements AdapterView.OnItemSele
     List<String> listaCantPers;
     ArrayAdapter<String> adapter;
     ArrayAdapter<String> adapterPeliculas;
+    CineViewModel viewModel;
     int cntSeleccionada = 0;
     double valorPelicula = 0;
 
@@ -43,8 +43,11 @@ public class CineActivity extends BaseActivity implements AdapterView.OnItemSele
         spinnerPeliculas = findViewById(R.id.spinnerPeliculas);
         edad = findViewById(R.id.edad);
 
-        listaPeliculas = DataSource.getPeliculas();
-        listaCantPers = DataSource.getListaCantPers();
+        viewModel = ProveedorDeObjetos.createViewModel();
+
+        listaPeliculas = viewModel.getProgramacion();
+        listaCantPers = viewModel.getCantidadPersonas();
+
         listaPelFiltradas = new ArrayList<>();
 
         //Creo lista de titulos de peliculas
@@ -69,7 +72,6 @@ public class CineActivity extends BaseActivity implements AdapterView.OnItemSele
 
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l) {
-
         //Tomo el valor de la pelicula seleccionada
         if (adapterView.getId() == R.id.spinnerPeliculas) {
             valorPelicula = listaPelFiltradas.get(position).getValor();
@@ -81,7 +83,8 @@ public class CineActivity extends BaseActivity implements AdapterView.OnItemSele
         }
 
         //Llamo a la funciona de calculo con la cantidad de personas y el valor de la pelicula
-        calcularPrecioActual(cntSeleccionada, valorPelicula);
+        String totalFinal = viewModel.calcularPrecioActual(cntSeleccionada, valorPelicula);
+        textTotal.setText(totalFinal);
     }
 
     @Override
@@ -93,38 +96,20 @@ public class CineActivity extends BaseActivity implements AdapterView.OnItemSele
     public void onClick(View view) {
 
         if (view.getId() == R.id.btnComprar) {//Accion
-
-            //Validar si la compra es correcta
-            //Mostrar mensaje
-            Toast.makeText(getApplicationContext(), "Compra realizada", Toast.LENGTH_SHORT).show();
+            toast("Compra realizada");
         }
 
         if (view.getId() == R.id.btnPeliculas) {
-
             if (edad.getText().toString().length() > 0) {
                 spinnerPeliculas.setVisibility(View.VISIBLE);
-
-                if (Integer.parseInt(edad.getText().toString()) > 17) {
-                    cargarLista("Sony");
-                } else {
-                    cargarLista("Disney");
-                }
+                String proveedor = viewModel.resolveProveedor(edad.getText().toString());
+                cargarLista(proveedor);
             } else {
                 toast(Constants.AGE_MESSAGE);
             }
         }
     }
 
-
-    private void calcularPrecioActual(int cntSeleccionada, double valorPelicula) {
-        double totalFinal;
-        if (cntSeleccionada == 5) {
-            totalFinal = (cntSeleccionada * valorPelicula * 0.8);
-        } else {
-            totalFinal = (cntSeleccionada * valorPelicula);
-        }
-        textTotal.setText(String.valueOf(totalFinal));
-    }
 
     private void cargarLista(String proveedor) {
 

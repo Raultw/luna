@@ -3,13 +3,13 @@ package com.example.cine;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DataSource {
+public class DataSource implements ContratoDataSource {
 
     final static int precio2D = 50;
     final static int precio3D = 100;
 
 
-    public static List<Pelicula> getPeliculas() {
+    public List<Pelicula> getPeliculas() {
         ArrayList<Pelicula> listaPeliculas = new ArrayList<>();
 
         //Creo los proveedores
@@ -29,10 +29,10 @@ public class DataSource {
         return listaPeliculas;
     }
 
-    public static List<String> getListaCantPers(){
+    public List<String> getListaCantPers() {
 
         //Creo la lista de personas
-        List<String>listaCantPers = new ArrayList<>();
+        List<String> listaCantPers = new ArrayList<>();
         //Cargo la lista con cantidades de personas
         listaCantPers.add("1");
         listaCantPers.add("2");
