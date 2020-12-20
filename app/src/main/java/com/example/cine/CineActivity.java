@@ -1,20 +1,16 @@
 package com.example.cine;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.clase7.R;
 
@@ -63,6 +59,7 @@ public class CineActivity extends AppCompatActivity implements AdapterView.OnIte
 
         //Genero adapter y envio la lista de personas al spinner
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listaCantPers);
+
         cntPersonas.setAdapter(adapter);
 
         cntPersonas.setOnItemSelectedListener(this);
