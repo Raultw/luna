@@ -15,12 +15,13 @@ import com.example.cine.InfoCine;
 import com.example.cine.ProveedorDeObjetos;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class SeleccionCine extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ListView seleccionCine;
     AdaptadorCine adapterCines;
-    ArrayList<CineInfo> listaCines;
+    List<CineInfo> listaCines;
     CineViewModel viewModel;
 
     @Override
@@ -31,8 +32,8 @@ public class SeleccionCine extends AppCompatActivity implements AdapterView.OnIt
         seleccionCine = findViewById(R.id.listViewCines);
 
         viewModel = ProveedorDeObjetos.createViewModel(); //PREGUNTAR PORQUE NO HACE FALTA.
-        listaCines = (ArrayList) viewModel.getCines();
-        adapterCines = new AdaptadorCine(this, listaCines);
+        listaCines = viewModel.getCines();
+        adapterCines = new AdaptadorCine(this, (ArrayList<CineInfo>) listaCines);
         seleccionCine.setAdapter(adapterCines);
 
         seleccionCine.setOnItemClickListener(SeleccionCine.this);
