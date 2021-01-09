@@ -21,6 +21,7 @@ public class AdaptadorCine extends BaseAdapter {
         this.context = context;
         this.listaCines = listaCines;
 
+
     }
 
     @Override
@@ -43,7 +44,7 @@ public class AdaptadorCine extends BaseAdapter {
         CineInfo cine = (CineInfo) getItem(position);
 
         view = LayoutInflater.from(context).inflate(R.layout.lista_cines, null);
-        ImageView img = view.findViewById(R.id.imgTapa);
+        ImageView img = view.findViewById(R.id.ivCine);
         TextView titulo = view.findViewById(R.id.textTitulo);
         TextView descripcion = view.findViewById(R.id.textDescripcion);
 
@@ -53,4 +54,6 @@ public class AdaptadorCine extends BaseAdapter {
 
         return view;
     }
+
+
 }

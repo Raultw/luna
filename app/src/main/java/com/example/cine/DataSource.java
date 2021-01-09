@@ -1,5 +1,7 @@
 package com.example.cine;
 
+import com.example.clase7.R;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -41,6 +43,24 @@ public class DataSource implements ContratoDataSource {
         listaCantPers.add("5");
 
         return listaCantPers;
+    }
+
+    public List<CineInfo> getCines() {
+        //Creo la lista de cines
+        List<CineInfo> listaCines = new ArrayList<>();
+
+        //Creo los cines
+        CineInfo cine1 = new CineInfo(R.drawable.cine_hoyts, "Cine HOYTS", "Cine 3D de la capital, 3 salas, bla bla bla");
+        CineInfo cine2 = new CineInfo(R.drawable.cine_imax, "Cine IMAX", "Cine ubicado en el centro de la ciudad");
+        CineInfo cine3 = new CineInfo(R.drawable.cine_inca, "Cine INCA", "Historico cine Argentino, que proyecta filmografia nacional");
+
+        //Cargo el arreglo con los cines
+        listaCines.add(cine1);
+        listaCines.add(cine2);
+        listaCines.add(cine3);
+
+        return listaCines;
+
     }
 
 }

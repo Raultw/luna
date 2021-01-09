@@ -1,5 +1,6 @@
 package com.example.cine;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -22,7 +23,7 @@ public class CineActivity extends BaseActivity implements AdapterView.OnItemSele
     Spinner cntPersonas, spinnerPeliculas;
     List<Pelicula> listaPeliculas, listaPelFiltradas;
     List<String> titulosPeliculas;
-    Button btnComprar, btnPeliculas;
+    Button btnComprar, btnPeliculas, btnCines;
     TextView textTotal;
     EditText edad;
     List<String> listaCantPers;
@@ -42,12 +43,11 @@ public class CineActivity extends BaseActivity implements AdapterView.OnItemSele
         cntPersonas = findViewById(R.id.cantPersonas);
         spinnerPeliculas = findViewById(R.id.spinnerPeliculas);
         edad = findViewById(R.id.edad);
+        btnCines = findViewById(R.id.btnCines);
 
         viewModel = ProveedorDeObjetos.createViewModel();
-
         listaPeliculas = viewModel.getProgramacion();
         listaCantPers = viewModel.getCantidadPersonas();
-
         listaPelFiltradas = new ArrayList<>();
 
         //Creo lista de titulos de peliculas
@@ -59,12 +59,12 @@ public class CineActivity extends BaseActivity implements AdapterView.OnItemSele
 
         //Genero adapter y envio la lista de personas al spinner
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, listaCantPers);
-
         cntPersonas.setAdapter(adapter);
 
         cntPersonas.setOnItemSelectedListener(this);
         spinnerPeliculas.setOnItemSelectedListener(this);
         btnComprar.setOnClickListener(this);
+        btnCines.setOnClickListener(this);
 
 
     }
@@ -107,6 +107,11 @@ public class CineActivity extends BaseActivity implements AdapterView.OnItemSele
             } else {
                 toast(Constants.AGE_MESSAGE);
             }
+        }
+
+        if (view.getId() == R.id.btnCines) {
+            Intent i = new Intent(CineActivity.this, InfoCine.class);
+            startActivity(i);
         }
     }
 

@@ -1,21 +1,27 @@
 package com.example.clase7;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.cine.AdaptadorCine;
 import com.example.cine.CineInfo;
+import com.example.cine.CineViewModel;
+import com.example.cine.InfoCine;
+import com.example.cine.ProveedorDeObjetos;
 
 import java.util.ArrayList;
 
-public class SeleccionCine extends AppCompatActivity {
+public class SeleccionCine extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     ListView seleccionCine;
     AdaptadorCine adapterCines;
-    ArrayList<CineInfo> listadoCines;
-
+    ArrayList<CineInfo> listaCines;
+    CineViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,15 +29,28 @@ public class SeleccionCine extends AppCompatActivity {
         setContentView(R.layout.activity_seleccion_cine);
 
         seleccionCine = findViewById(R.id.listViewCines);
-        listadoCines = new ArrayList<>();
-        CineInfo cine1 = new CineInfo(R.drawable.cine_hoyts, "Cine HOYTS", "Cine 3D de la capital, 3 salas, bla bla bla");
-        CineInfo cine2 = new CineInfo(R.drawable.cine_imax, "Cine IMAX", "Cine ubicado en el centro de la ciudad");
-        CineInfo cine3 = new CineInfo(R.drawable.cine_inca, "Cine INCA", "Historico cine Argentino, que proyecta filmografia nacional");
-        listadoCines.add(cine1);
-        listadoCines.add(cine2);
-        listadoCines.add(cine3);
 
-        adapterCines = new AdaptadorCine(this, listadoCines);
+        viewModel = ProveedorDeObjetos.createViewModel(); //PREGUNTAR PORQUE NO HACE FALTA.
+        listaCines = (ArrayList) viewModel.getCines();
+        adapterCines = new AdaptadorCine(this, listaCines);
         seleccionCine.setAdapter(adapterCines);
+
+        seleccionCine.setOnItemClickListener(SeleccionCine.this);
+
+
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        if (adapterView.getId() == R.id.listViewCines) {
+            CineInfo cine = listaCines.get(i);
+            //Toast.makeText(this, "Selecciono: " + listaCines.get(i).getTitulo(), Toast.LENGTH_SHORT).show();
+            Intent intentSinopsis = new Intent(this, InfoCine.class);
+            intentSinopsis.putExtra("titulo", cine.getTitulo());
+            intentSinopsis.putExtra("descripcion", cine.getDescripcion());
+            intentSinopsis.putExtra("imagen", cine.getImgId());
+            startActivity(intentSinopsis);
+        }
+
     }
 }

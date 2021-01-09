@@ -7,7 +7,7 @@
 
 
     <ImageView
-        android:id="@+id/imgTapa"
+        android:id="@+id/ivCine"
         android:layout_width="100dp"
         android:layout_height="70dp"
         android:layout_marginTop="5dp"
@@ -32,5 +32,8 @@
             android:layout_height="wrap_content"
             android:textSize="16sp" />
 
+
     </LinearLayout>
+
+
 </androidx.appcompat.widget.LinearLayoutCompat>

@@ -18,6 +18,10 @@ public class CineViewModel {
         return dataSource.getListaCantPers();
     }
 
+    public List<CineInfo> getCines() {
+        return dataSource.getCines();
+    }
+
     public String calcularPrecioActual(int cntSeleccionada, double valorPelicula) {
         double totalFinal;
         if (cntSeleccionada == 5) {
