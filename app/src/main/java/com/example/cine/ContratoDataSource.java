@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface ContratoDataSource {
 
-    List<Pelicula> getPeliculas();
+    List<Pelicula> getPeliculas(String cine);
 }

@@ -46,7 +46,7 @@ public class CineActivity extends BaseActivity implements AdapterView.OnItemSele
         btnCines = findViewById(R.id.btnCines);
 
         viewModel = ProveedorDeObjetos.createViewModel();
-        listaPeliculas = viewModel.getProgramacion();
+        listaPeliculas = viewModel.getProgramacion("hoyts");
         listaCantPers = viewModel.getCantidadPersonas();
         listaPelFiltradas = new ArrayList<>();
 

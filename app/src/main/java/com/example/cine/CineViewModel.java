@@ -10,8 +10,8 @@ public class CineViewModel {
         this.dataSource = dataSource;
     }
 
-    public List<Pelicula> getProgramacion() {
-        return dataSource.getPeliculas();
+    public List<Pelicula> getProgramacion(String cine) {
+        return dataSource.getPeliculas(cine);
     }
 
     public List<String> getCantidadPersonas() {

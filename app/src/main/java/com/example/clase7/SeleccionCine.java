@@ -46,11 +46,11 @@ public class SeleccionCine extends AppCompatActivity implements AdapterView.OnIt
         if (adapterView.getId() == R.id.listViewCines) {
             CineInfo cine = listaCines.get(i);
             //Toast.makeText(this, "Selecciono: " + listaCines.get(i).getTitulo(), Toast.LENGTH_SHORT).show();
-            Intent intentSinopsis = new Intent(this, InfoCine.class);
-            intentSinopsis.putExtra("titulo", cine.getTitulo());
-            intentSinopsis.putExtra("descripcion", cine.getDescripcion());
-            intentSinopsis.putExtra("imagen", cine.getImgId());
-            startActivity(intentSinopsis);
+            Intent intentInfoCine = new Intent(SeleccionCine.this, InfoCine.class);
+            intentInfoCine.putExtra("titulo", cine.getTitulo());
+            intentInfoCine.putExtra("descripcion", cine.getDescripcion());
+            intentInfoCine.putExtra("imagen", cine.getImgId());
+            startActivity(intentInfoCine);
         }
 
     }
